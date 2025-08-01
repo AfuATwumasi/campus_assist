@@ -1,131 +1,221 @@
-// import 'package:campus_assist/screens/home_screen.dart';
+import 'package:campus_assist/screens/profile/edit_profile_screen.dart';
 import 'package:flutter/material.dart';
+import '../profile/delete_account_screen.dart';
+import '../profile/help_faq_screen.dart';
+import '../profile/contact_support.dart';
+import '../profile/change_password.dart';
+import '../profile/logout_screen.dart';
+import '../profile/about_screen.dart';
+import 'home_screen.dart';
 
-import 'home_screen.dart';// Import your homepage
-import 'package:campus_assist/screens/welcome_and_home/home_screen.dart'
-    show CampusSafetyHomePage;
+class SettingsScreen extends StatefulWidget {
+  const SettingsScreen({super.key});
 
-class SettingsPage extends StatelessWidget {
-  const SettingsPage({Key? key}) : super(key: key);
+  @override
+  State<SettingsScreen> createState() => _SettingsScreenState();
+}
+
+class _SettingsScreenState extends State<SettingsScreen> {
+  bool _campusAlerts = false;
+  bool _lostAndFound = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF5F5F5),
-      body: SafeArea(
+      backgroundColor: const Color(0xFF1F41BB),
+      body: SingleChildScrollView(
         child: Column(
           children: [
-            // Header
-            Container(
-              padding: const EdgeInsets.all(20),
-              child: Row(
+            const SizedBox(height: kToolbarHeight - 50),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Stack(
+                alignment: Alignment.center,
                 children: [
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: IconButton(
+                      icon: const Icon(Icons.arrow_back, color: Colors.white),
+                      onPressed: () {
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const CampusSafetyHomePage(),
+                          ),
+                              (Route<dynamic> route) => false,
+                        );
+                      },
+                      tooltip: 'Back to Home',
+                    ),
+                  ),
+                  Positioned(
+                    left: 20,
+                    top: 70,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        width: 40,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.1),
+                              blurRadius: 4,
+                              offset: Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                        child: const Icon(
+                          Icons.arrow_back,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                  ),
                   const Text(
                     'Settings',
                     style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
-                  ),
-                  const Spacer(),
-                  ClipOval(
-                    child: Image.asset(
-                      'assets/images/gg_profile.png',
-                      width: 36,
-                      height: 36,
-                      fit: BoxFit.cover,
+                      color: Colors.white,
+                      fontSize: 32,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ],
               ),
             ),
-
-            // Settings Options
-            Expanded(
-              child: ListView(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                children: [
-                  buildSettingItem(Icons.person, 'Account'),
-                  buildSettingItem(Icons.notifications, 'Notifications'),
-                  buildSettingItem(Icons.lock, 'Privacy'),
-                  buildSettingItem(Icons.help, 'Help & Support'),
-                  buildSettingItem(Icons.info, 'About'),
-                  const SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: () {
-                      // Link to Home Page
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const CampusSafetyHomePage(),
-                        ),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF4A90E2),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      padding: const EdgeInsets.symmetric(vertical: 15),
-                    ),
-                    child: const Text(
-                      'Back to Home',
-                      style: TextStyle(fontSize: 16, color: Colors.white),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-            // Bottom Navigation Bar
+            const SizedBox(height: 0),
             Container(
-              padding: const EdgeInsets.symmetric(vertical: 15),
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.1),
-                    spreadRadius: 1,
-                    blurRadius: 5,
-                    offset: const Offset(0, -2),
-                  ),
-                ],
+                borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const CampusSafetyHomePage(),
-                        ),
-                      );
-                    },
-                    child: Image.asset(
-                      'assets/images/home_icon.png',
-                      width: 24,
-                      height: 24,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Center(
+                      child: Column(
+                        children: [
+                          const CircleAvatar(
+                            radius: 50,
+                            backgroundImage: NetworkImage('https://placehold.co/128x128'),
+                          ),
+                          const SizedBox(height: 0),
+                          const Text(
+                            'Ethan Carter',
+                            style: TextStyle(
+                              fontSize: 22,
+                              fontWeight: FontWeight.w700,
+                              color: Color(0xFF0C141C),
+                            ),
+                          ),
+                          const Text(
+                            'ethan.carter@email.com',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                              color: Color(0xFF49729B),
+                            ),
+                          ),
+                          const SizedBox(height: 0),
+                          OutlinedButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const EditProfileScreen(),
+                                ),
+                              );
+                            },
+                            style: OutlinedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              side: const BorderSide(color: Color(0xFFCBD4E1)),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 90,
+                                vertical: 4,
+                              ),
+                            ),
+                            child: const Text(
+                              'Edit Profile',
+                              style: TextStyle(
+                                color: Color(0xFF1F41BB),
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  Image.asset(
-                    'assets/images/messages_icon.png',
-                    width: 24,
-                    height: 24,
-                  ),
-                  Image.asset(
-                    'assets/images/clipboard_image.png',
-                    width: 24,
-                    height: 24,
-                  ),
-                  Image.asset(
-                    'assets/images/settings_icon.png',
-                    width: 24,
-                    height: 24,
-                  ),
-                ],
+                    const SizedBox(height: 0),
+                    _buildSectionTitle('Account Settings'),
+                    _buildListTile(Icons.person_outline, 'Profile info'),
+                    _buildListTile(Icons.lock_outline, 'Change password'),
+
+                    const SizedBox(height: 0),
+                    _buildSectionTitle('App Preferences'),
+                    _buildToggleTile('Campus Alerts', _campusAlerts, (val) {
+                      setState(() => _campusAlerts = val);
+                    }),
+                    _buildToggleTile('Lost & Found Update', _lostAndFound, (val) {
+                      setState(() => _lostAndFound = val);
+                    }),
+
+                    const SizedBox(height: 0),
+                    _buildSectionTitle('Privacy & Security'),
+                    _buildListTile(Icons.delete_outline, 'Delete Account'),
+
+                    const SizedBox(height: 0),
+                    _buildSectionTitle('Support'),
+                    _buildListTile(Icons.help_outline, 'Help & FAQs'),
+                    _buildListTile(Icons.mail_outline, 'Contact Support'),
+                    _buildListTile(Icons.info_outline, 'About CampusAssist'),
+
+                    const SizedBox(height: 0),
+                    Center(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const LogoutConfirmationScreen(),
+                            ),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFF1F41BB),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 40,
+                            vertical: 4,
+                          ),
+                          elevation: 10,
+                          shadowColor: const Color(0xFFCAD6FF),
+                        ),
+                        child: const Text(
+                          'Logout',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 0),
+                  ],
+                ),
               ),
             ),
           ],
@@ -134,24 +224,94 @@ class SettingsPage extends StatelessWidget {
     );
   }
 
-  // Reusable settings item widget
-  Widget buildSettingItem(IconData icon, String title) {
-    return Column(
-      children: [
-        ListTile(
-          contentPadding: const EdgeInsets.symmetric(horizontal: 0),
-          leading: Icon(icon, color: Colors.grey[700]),
-          title: Text(
-            title,
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-          ),
-          trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-          onTap: () {
-            // Add action for each setting item
-          },
+  Widget _buildListTile(IconData icon, String text) {
+    return ListTile(
+      contentPadding: EdgeInsets.zero,
+      leading: Icon(icon, color: Colors.black),
+      title: Text(
+        text,
+        style: const TextStyle(
+          fontSize: 18,
+          color: Colors.black,
+          fontWeight: FontWeight.w400,
         ),
-        const Divider(),
-      ],
+      ),
+      trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+      onTap: () {
+        if (text == 'Delete Account') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const DeleteAccountScreen(),
+            ),
+          );
+        } else if (text == 'Profile info') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const EditProfileScreen(),
+            ),
+          );
+        } else if (text == 'Change password') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const ChangePasswordScreen(),
+            ),
+          );
+        } else if (text == 'Help & FAQs') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const HelpFaqsScreen(),
+            ),
+          );
+        } else if (text == 'Contact Support') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const ContactSupportScreen(),
+            ),
+          );
+        } else if (text == 'About CampusAssist') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const CampusAssistScreen(),
+            ),
+          );
+        }
+      },
+    );
+  }
+
+  Widget _buildSectionTitle(String title) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 16, bottom: 8),
+      child: Text(
+        title,
+        style: const TextStyle(
+          color: Color(0xFF0C141C),
+          fontSize: 18,
+          fontWeight: FontWeight.w700,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildToggleTile(String text, bool value, Function(bool) onChanged) {
+    return SwitchListTile(
+      contentPadding: EdgeInsets.zero,
+      title: Text(
+        text,
+        style: const TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.w400,
+        ),
+      ),
+      value: value,
+      onChanged: onChanged,
+      activeColor: const Color(0xFF1F41BB),
     );
   }
 }

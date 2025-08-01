@@ -31,10 +31,12 @@ class _LoginScreenState extends State<LoginScreen> {
               // Header
               Text(
                 'Login here',
+                textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF1A1A1A),
+                  fontSize: 30,
+                  color: Color(0xFF1F41BB),
+                  fontFamily:  'Poppins',
+                  fontWeight: FontWeight.w700,
                 ),
               ),
               
@@ -42,9 +44,13 @@ class _LoginScreenState extends State<LoginScreen> {
               
               Text(
                 'Welcome back you\'ve\nbeen missed!',
+                textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 16,
-                  color: Color(0xFF666666),
+                  color: Color(0xFF000000),
+                  fontSize: 20,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w600,
+
                   height: 1.4,
                 ),
               ),
@@ -58,10 +64,27 @@ class _LoginScreenState extends State<LoginScreen> {
                   hintText: 'Email',
                   hintStyle: TextStyle(color: Color(0xFF999999)),
                   filled: true,
-                  fillColor: Color(0xFFF5F5F5),
+                  fillColor: Color(0xFFF1F4FF),
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                    borderSide: BorderSide.none,
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(
+                      color: Color(0xFF1F41BB),
+                      width: 2,
+                    ),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(
+                      color: Color(0xFF1F41BB),
+                      width: 2,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(
+                      color: Color(0xFF1F41BB),
+                      width: 2,
+                    ),
                   ),
                   contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                 ),
@@ -77,7 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   hintText: 'Password',
                   hintStyle: TextStyle(color: Color(0xFF999999)),
                   filled: true,
-                  fillColor: Color(0xFFF5F5F5),
+                  fillColor: Color(0xFFF1F4FF),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                     borderSide: BorderSide.none,
@@ -98,7 +121,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Text(
                     'Forgot your password?',
                     style: TextStyle(
-                      color: Color(0xFF4A90E2),
+                      color: Color(0xFF1F41BB),
                       fontSize: 14,
                     ),
                   ),
@@ -115,7 +138,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Navigator.pushNamed(context, '/home');
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFF4A90E2),
+                    backgroundColor: Color(0xFF1F41BB),
                     padding: EdgeInsets.symmetric(vertical: 16),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
@@ -153,18 +176,7 @@ class _LoginScreenState extends State<LoginScreen> {
               
               SizedBox(height: 40),
               
-              // Or continue with
-              Center(
-                child: Text(
-                  'Or continue with',
-                  style: TextStyle(
-                    color: Color(0xFF666666),
-                    fontSize: 14,
-                  ),
-                ),
-              ),
-              
-              SizedBox(height: 20),
+
               
               // Social Login Buttons
               Center(

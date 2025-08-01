@@ -52,12 +52,28 @@ class ReportSubmittedScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 60),
 
-                    // 🟩 Go to Dashboard button (disabled)
+                    // 🟩 Go to Dashboard button (now enabled)
                     SizedBox(
                       width: 183,
                       height: 52,
                       child: OutlinedButton(
-                        onPressed: null, // Disabled
+                        onPressed: () {
+                          // Navigate back to the HomeScreen
+                          // Option 1: If HomeScreen is the very first screen (root) and you want to clear the stack
+                          Navigator.pushNamed(context, '/home');
+
+                          // Option 2: If you want to push a new instance of HomeScreen (less common for "go to dashboard" from a submitted screen)
+                          // Make sure to import your HomeScreen, e.g.:
+                          // import 'package:your_app_name/screens/home_screen.dart'; // Adjust path as needed
+                          // Navigator.pushAndRemoveUntil(
+                          //   context,
+                          //   MaterialPageRoute(builder: (context) => const HomeScreen()), // Replace HomeScreen with your actual home screen widget
+                          //   (Route<dynamic> route) => false, // This removes all previous routes
+                          // );
+
+                          // Option 3: If you have a specific named route for your home screen
+                          // Navigator.pushNamedAndRemoveUntil(context, '/home', (Route<dynamic> route) => false);
+                        },
                         style: OutlinedButton.styleFrom(
                           backgroundColor: const Color(0xFFFBFBFB),
                           side: const BorderSide(
@@ -74,12 +90,14 @@ class ReportSubmittedScreen extends StatelessWidget {
                             fontFamily: 'Inter',
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
-                            color: Colors.black,
+                            color: Colors.black, // For OutlinedButton, you might want this to be Theme-dependent or match the border
+                            // e.g., color: Color(0xFF1F41BB) if you want blue text
                           ),
                         ),
                       ),
                     ),
                     const SizedBox(height: 24),
+
 
                     // 🟦 View My Reports button
                     SizedBox(

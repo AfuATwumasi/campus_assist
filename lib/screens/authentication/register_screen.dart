@@ -33,10 +33,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 // Header
                 Text(
                   'Create Account',
+                  textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF1A1A1A),
+                    color: const Color(0xFF1F41BB),
+                    fontSize: 30,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w700,
                   ),
                 ),
                 
@@ -44,6 +46,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 
                 Text(
                   'Create an account and connect with the campus community!',
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 16,
                     color: Color(0xFF666666),
@@ -54,23 +57,53 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 SizedBox(height: 40),
                 
                 // Email Field
+                Text(
+                  'Email',
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    color: Color(0xFF616161),
+                    fontSize: 16,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                SizedBox(height: 8),
+
                 TextField(
                   controller: _emailController,
                   decoration: InputDecoration(
                     hintText: 'Email',
                     hintStyle: TextStyle(color: Color(0xFF999999)),
                     filled: true,
-                    fillColor: Color(0xFFF5F5F5),
+                    fillColor: Color(0xFFF1F4FF), // updated from F5F5F5
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.circular(10), // updated from 8
+                      borderSide: BorderSide(
+                        color: Color(0xFF1F41BB), // added visible blue border
+                        width: 2,
+                      ),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(
+                        color: Color(0xFF1F41BB),
+                        width: 2,
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(
+                        color: Color(0xFF1F41BB),
+                        width: 2,
+                      ),
                     ),
                     contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                   ),
                 ),
-                
+
                 SizedBox(height: 16),
-                
+
+
                 // Phone Number Field
                 TextField(
                   controller: _phoneController,
@@ -78,10 +111,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     hintText: 'Phone number',
                     hintStyle: TextStyle(color: Color(0xFF999999)),
                     filled: true,
-                    fillColor: Color(0xFFF5F5F5),
+                    fillColor: Color(0xFFF1F4FF),
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide (
+                        color: Color(0xFF1F41BB),
+                        width: 2,
+                      ),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(
+                        color: Color(0xFF1F41BB),
+                        width: 2,
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(
+                        color: Color(0xFF1F41BB),
+                        width: 2,
+                      ),
                     ),
                     contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                   ),
@@ -97,11 +147,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     hintText: 'Password',
                     hintStyle: TextStyle(color: Color(0xFF999999)),
                     filled: true,
-                    fillColor: Color(0xFFF5F5F5),
+                    fillColor: Color(0xFFF1F4FF),
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(10),
                       borderSide: BorderSide.none,
                     ),
+
                     contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                   ),
                 ),
@@ -116,9 +167,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     hintText: 'Confirm Password',
                     hintStyle: TextStyle(color: Color(0xFF999999)),
                     filled: true,
-                    fillColor: Color(0xFFF5F5F5),
+                    fillColor: Color(0xFFF1F4FF),
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(10),
                       borderSide: BorderSide.none,
                     ),
                     contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
@@ -135,7 +186,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       Navigator.pushNamed(context, '/home');
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xFF4A90E2),
+                      backgroundColor: Color(0xFF1F41BB),
                       padding: EdgeInsets.symmetric(vertical: 16),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
@@ -163,8 +214,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     },
                     child: Text(
                       'Already have an account',
+                      textAlign: TextAlign.center,
                       style: TextStyle(
-                        color: Color(0xFF666666),
+                        color: Color(0xFF494949),
                         fontSize: 14,
                       ),
                     ),
@@ -178,7 +230,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   child: Text(
                     'Or continue with',
                     style: TextStyle(
-                      color: Color(0xFF666666),
+                      color: Color(0xFF1F41BB),
                       fontSize: 14,
                     ),
                   ),

@@ -46,20 +46,20 @@ class _LostItemFormScreenState extends State<LostItemFormScreen> {
                 controller: _itemNameController,
                 hintText: 'Enter item name',
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: 5),
               _buildFormField(
                 label: 'Description',
                 controller: _descriptionController,
                 hintText: 'Please enter description',
                 maxLines: 6,
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: 5),
               _buildFormField(
                 label: 'Location',
                 controller: _locationController,
                 hintText: 'Enter last known location',
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: 5),
               Row(
                 children: [
                   Expanded(
@@ -79,7 +79,7 @@ class _LostItemFormScreenState extends State<LostItemFormScreen> {
                   ),
                 ],
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: 5),
               const Text(
                 'Add Image',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
@@ -112,7 +112,7 @@ class _LostItemFormScreenState extends State<LostItemFormScreen> {
                   Switch(
                     value: _notifyMatch,
                     onChanged: (value) => setState(() => _notifyMatch = value),
-                    activeColor: const Color(0xFF4A5EBF),
+                    activeColor: const Color(0xFF1F41BB),
                   ),
                 ],
               ),
@@ -130,7 +130,7 @@ class _LostItemFormScreenState extends State<LostItemFormScreen> {
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF4A5EBF),
+                    backgroundColor: const Color(0xFF1F41BB),
                     foregroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     shape: RoundedRectangleBorder(

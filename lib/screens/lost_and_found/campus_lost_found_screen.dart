@@ -4,9 +4,9 @@ class CampusLostFoundScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF4A5EBF),
+      backgroundColor: const Color(0xFF1F41BB),
       appBar: AppBar(
-        backgroundColor: const Color(0xFF4A5EBF),
+        backgroundColor: const Color(0xFF1F41BB),
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
@@ -39,7 +39,7 @@ class CampusLostFoundScreen extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: 10),
               Text(
                 "Report missing items or browse what others have found on campus. We'll help you reconnect with what matters",
                 style: TextStyle(
@@ -48,7 +48,7 @@ class CampusLostFoundScreen extends StatelessWidget {
                   height: 1.5,
                 ),
               ),
-              const SizedBox(height: 32),
+              const SizedBox(height: 25),
               _buildOptionCard(
                 context,
                 title: "Lost Item Report",
@@ -62,7 +62,7 @@ class CampusLostFoundScreen extends StatelessWidget {
                 title: "Browse found items",
                 description:
                     "Check items others have found to see if yours has been listed.",
-                routeName: '/browse',
+                routeName: '/browse_items',
                 trailing: const Icon(Icons.menu, color: Colors.black87),
               ),
               const SizedBox(height: 16),

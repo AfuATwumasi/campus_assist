@@ -27,7 +27,7 @@ class _NewReportScreenState extends State<NewReportScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 34),
         child: ListView(
           children: [
-            const SizedBox(height: 34),
+            const SizedBox(height: 0),
 
             // 🔙 Back Button
             Align(
@@ -301,7 +301,7 @@ class _NewReportScreenState extends State<NewReportScreen> {
                 ),
               ),
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: 15),
 
             // 🙈 Report Anonymously
             Row(
@@ -327,7 +327,7 @@ class _NewReportScreenState extends State<NewReportScreen> {
                 ),
               ],
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: 15),
 
             // 🚀 Submit Button
             GestureDetector(
@@ -336,7 +336,7 @@ class _NewReportScreenState extends State<NewReportScreen> {
                 width: double.infinity,
                 padding: const EdgeInsets.symmetric(
                   horizontal: 20,
-                  vertical: 15,
+                  vertical: 10,
                 ),
                 decoration: BoxDecoration(
                   color: const Color(0xFF1F41BB),
@@ -362,7 +362,7 @@ class _NewReportScreenState extends State<NewReportScreen> {
                 ),
               ),
             ),
-            const SizedBox(height: 40),
+            const SizedBox(height: 20),
           ],
         ),
       ),

@@ -1,202 +1,242 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
-import '/models/found_item.dart';
 
-class BrowseFoundItemsScreen extends StatefulWidget {
-  @override
-  _BrowseFoundItemsScreenState createState() => _BrowseFoundItemsScreenState();
-}
-
-class _BrowseFoundItemsScreenState extends State<BrowseFoundItemsScreen> {
-  final List<FoundItem> foundItems = [
-    FoundItem(
-      name: 'Wallet',
-      description: 'Brown leather wallet with ID card inside.',
-      location: 'Library Building',
-      date: 'July 15, 2025',
-    ),
-    FoundItem(
-      name: 'Laptop',
-      description: 'HP Pavilion found near the cafeteria.',
-      location: 'Cafeteria',
-      date: 'July 16, 2025',
-    ),
-  ];
+class BrowseFoundItemsScreen extends StatelessWidget {
+  const BrowseFoundItemsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF4A5EBF),
-      appBar: AppBar(
-        backgroundColor: const Color(0xFF4A5EBF),
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-        title: const Text(
-          'Browse Found Items',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 20,
-            fontWeight: FontWeight.w600,
+      backgroundColor: Color(0xFF1F41BB),
+      body: Container(
+        width: 428,
+        height: 926,
+        clipBehavior: Clip.antiAlias,
+        decoration: ShapeDecoration(
+          color: const Color(0xFF1F41BB),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(50),
           ),
         ),
-      ),
-      body: Column(
-        children: [
-          _buildSearchBar(),
-          _buildFilters(),
-          const SizedBox(height: 16),
-          Expanded(
-            child: Container(
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(24),
-                  topRight: Radius.circular(24),
-                ),
-              ),
-              child: ListView.separated(
-                padding: const EdgeInsets.all(16),
-                itemCount: foundItems.length,
-                separatorBuilder: (_, __) => const SizedBox(height: 16),
-                itemBuilder: (context, index) {
-                  return _buildFoundItemCard(foundItems[index]);
-                },
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildSearchBar() => Padding(
-        padding: const EdgeInsets.all(16),
-        child: Container(
-          decoration: BoxDecoration(
-            color: const Color(0xFFE8E8F5),
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: const TextField(
-            decoration: InputDecoration(
-              hintText: 'Search items here',
-              prefixIcon: Icon(Icons.search),
-              border: InputBorder.none,
-              contentPadding:
-                  EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-            ),
-          ),
-        ),
-      );
-
-  Widget _buildFilters() => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Row(
+        child: Stack(
           children: [
-            Expanded(child: _buildFilterChip('Category')),
-            const SizedBox(width: 12),
-            Expanded(child: _buildFilterChip('Date')),
-            const SizedBox(width: 12),
-            Expanded(child: _buildFilterChip('Location')),
-          ],
-        ),
-      );
-
-  Widget _buildFilterChip(String label) => Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        decoration: BoxDecoration(
-          color: const Color(0xFFE8E8F5),
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Text(
-          label,
-          textAlign: TextAlign.center,
-          style:
-              const TextStyle(color: Color(0xFF4A5EBF), fontWeight: FontWeight.w500),
-        ),
-      );
-
-  Widget _buildFoundItemCard(FoundItem item) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: const Color(0xFFF8F8FA),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.grey[200]!),
-      ),
-      child: Row(
-        children: [
-          Container(
-            width: 60,
-            height: 60,
-            decoration: BoxDecoration(
-              color: Colors.grey[300],
-              borderRadius: BorderRadius.circular(8),
-            ),
-          ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(item.name,
-                    style: const TextStyle(
-                        fontSize: 16, fontWeight: FontWeight.w600)),
-                const SizedBox(height: 4),
-                Text(item.description,
-                    style: TextStyle(fontSize: 14, color: Colors.grey[600])),
-                const SizedBox(height: 8),
-                Row(
+            Positioned(
+              left: 0,
+              top: 158,
+              child: Container(
+                width: 428,
+                height: 768,
+                clipBehavior: Clip.antiAlias,
+                decoration: ShapeDecoration(
+                  color: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(50),
+                      bottomRight: Radius.circular(50),
+                    ),
+                  ),
+                ),
+                child: Stack(
                   children: [
-                    Text(item.location,
-                        style: TextStyle(fontSize: 12, color: Colors.grey[600])),
-                    const SizedBox(width: 20),
-                    Text(item.date,
-                        style: TextStyle(fontSize: 12, color: Colors.grey[600])),
+                    Positioned(
+                      left: 18,
+                      top: 26,
+                      child: FoundItemCard(
+                        context: context,
+                        itemName: 'Blue Backpack',
+                        description: 'A blue backpack with black zippers and a front pocket.',
+                        location: 'Building A',
+                        date: 'June 20, 2025',
+                      ),
+                    ),
+                    Positioned(
+                      left: 18,
+                      top: 177,
+                      child: FoundItemCard(
+                        context: context,
+                        itemName: 'Water Bottle',
+                        description: 'Silver reusable water bottle with stickers.',
+                        location: 'Library',
+                        date: 'June 21, 2025',
+                      ),
+                    ),
+                    Positioned(
+                      left: 18,
+                      top: 328,
+                      child: FoundItemCard(
+                        context: context,
+                        itemName: 'Black Umbrella',
+                        description: 'Black foldable umbrella with a curved handle.',
+                        location: 'Cafeteria',
+                        date: 'June 22, 2025',
+                      ),
+                    ),
+                    Positioned(
+                      left: 18,
+                      top: 479,
+                      child: FoundItemCard(
+                        context: context,
+                        itemName: 'Calculator',
+                        description: 'Casio scientific calculator with name label.',
+                        location: 'Room 204',
+                        date: 'June 23, 2025',
+                      ),
+                    ),
                   ],
                 ),
-              ],
-            ),
-          ),
-          const SizedBox(width: 16),
-          ElevatedButton(
-            onPressed: () => _showClaimDialog(context, item),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF4A5EBF),
-              foregroundColor: Colors.white,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
               ),
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
             ),
-            child: const Text('Claim'),
-          ),
-        ],
+            Positioned(
+              top: 60,
+              left: 100,
+              right: 100,
+              child: Text(
+                'Browse Found Items',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 26,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
+}
 
-  void _showClaimDialog(BuildContext context, FoundItem item) {
-    showDialog(
-      context: context,
-      builder: (_) => AlertDialog(
-        title: const Text('Claim Item'),
-        content: Text('Are you sure you want to claim "${item.name}"?'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
+class FoundItemCard extends StatelessWidget {
+  final BuildContext context;
+  final String itemName;
+  final String description;
+  final String location;
+  final String date;
+
+  const FoundItemCard({
+    required this.context,
+    required this.itemName,
+    required this.description,
+    required this.location,
+    required this.date,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 401,
+      height: 128,
+      decoration: ShapeDecoration(
+        color: const Color(0xFFFAF8F8),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(9)),
+      ),
+      child: Stack(
+        children: [
+          Positioned(
+            left: 18,
+            top: 15,
+            child: Container(
+              width: 69,
+              height: 67,
+              decoration: ShapeDecoration(
+                color: const Color(0xFFD9D9D9),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+              ),
+            ),
           ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Claim request submitted!')),
-              );
-            },
-            child: const Text('Claim'),
+          Positioned(
+            left: 10,
+            top: 91,
+            child: SizedBox(
+              width: 84,
+              height: 15,
+              child: Text(
+                location,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 14,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            left: 100,
+            top: 10,
+            child: Text(
+              itemName,
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 16,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+          Positioned(
+            left: 100,
+            top: 40,
+            child: SizedBox(
+              width: 282,
+              child: Text(
+                description,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 15,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            left: 100,
+            top: 91,
+            child: Text(
+              date,
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 14,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+          ),
+          Positioned(
+            left: 300,
+            top: 90,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, '/item_found');
+              },
+              child: Container(
+                width: 94,
+                height: 23,
+                decoration: ShapeDecoration(
+                  color: const Color(0xFF1F41BB),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(11),
+                  ),
+                ),
+                child: Center(
+                  child: Text(
+                    'Claim',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              ),
+            ),
           ),
         ],
       ),

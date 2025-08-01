@@ -16,7 +16,7 @@ class WelcomeScreen extends StatelessWidget {
                 height: 300,
                 width: 300,
                 child: Image.asset(
-                  'assets/images/welcome_image.png', 
+                  'assets/images/welcome_image.png',
                   fit: BoxFit.contain,
                 ),
               ),
@@ -30,7 +30,7 @@ class WelcomeScreen extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 32,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF1A1A1A),
+                  color: Color(0xFF1F41BB),
                   height: 1.2,
                 ),
               ),
@@ -55,13 +55,13 @@ class WelcomeScreen extends StatelessWidget {
                 children: [
                   // Login Button
                   Expanded(
-                    child: OutlinedButton(
+                    child: ElevatedButton(
                       onPressed: () {
                         Navigator.pushNamed(context, '/login');
                       },
-                      style: OutlinedButton.styleFrom(
-                        padding: EdgeInsets.symmetric(vertical: 16),
-                        side: BorderSide(color: Color(0xFF4A90E2), width: 2),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color(0xFF1F41BB), // Solid blue background
+                        padding: EdgeInsets.symmetric(vertical: 15),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
@@ -69,14 +69,15 @@ class WelcomeScreen extends StatelessWidget {
                       child: Text(
                         'Login',
                         style: TextStyle(
-                          color: Color(0xFF4A90E2),
+                          color: Colors.white, // White text on blue background
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
                     ),
                   ),
-                  
+
+
                   SizedBox(width: 16),
                   
                   // Register Button
@@ -85,8 +86,9 @@ class WelcomeScreen extends StatelessWidget {
                       onPressed: () {
                         Navigator.pushNamed(context, '/register');
                       },
+
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xFF4A90E2),
+                        backgroundColor: Color(0xFFFFFFFF),
                         padding: EdgeInsets.symmetric(vertical: 16),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
@@ -96,7 +98,7 @@ class WelcomeScreen extends StatelessWidget {
                       child: Text(
                         'Register',
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Color(0xFF0A0A0A),
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
                         ),

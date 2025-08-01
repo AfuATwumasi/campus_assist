@@ -1,3 +1,5 @@
+import 'package:campus_assist/screens/chats/message_screen.dart';
+import 'package:campus_assist/screens/profile/help_faq_screen.dart';
 import 'package:flutter/material.dart';
 
 // Reports Screen
@@ -24,9 +26,27 @@ import 'screens/lost_and_found/campus_lost_found_screen.dart';
 import 'screens/lost_and_found/browse_found_items_screen.dart';
 import 'screens/lost_and_found/lost_item_form_screen.dart';
 import 'screens/lost_and_found/found_item_form_screen.dart';
+import 'screens/lost_and_found/claimed_screen.dart';
+
 
 // Settings
+import 'screens/profile/delete_account_screen.dart';
+import 'screens/profile/help_faq_screen.dart';
+import 'screens/profile/change_password.dart';
+import 'screens/profile/contact_support.dart';
+import 'screens/profile/about_screen.dart';
+import 'screens/profile/logout_screen.dart';
 
+//Chats
+import 'screens/chats/message_screen.dart';
+import 'screens/chats/chatbox_screen.dart';
+import 'screens/chats/item_found.dart';
+//Feedback
+import 'screens/welcome_and_home/feedback_screen (1).dart';
+
+
+//Alert
+import 'screens/alert/campusalerts_screen (1).dart';
 
 void main() {
   runApp(const CampusAssistApp());
@@ -53,6 +73,8 @@ routes: {
         '/login': (context) => LoginScreen(),
         '/register': (context) => RegisterScreen(),
         '/home': (context) => CampusSafetyHomePage(),
+        '/feedback': (context) => FeedbackPage(),
+        '/campus_alert_page': (context) => CampusAlertsScreen(),
 
         // Incident Reporting
         '/new_report': (context) => const NewReportScreen(),
@@ -65,11 +87,27 @@ routes: {
         '/browse_items': (context) => BrowseFoundItemsScreen(),
         '/lost_form': (context) => LostItemFormScreen(),
         '/found_form': (context) => FoundItemFormScreen(),
+        '/item_found': (context) => FoundItemDetailsScreen(),
+        '/claimed': (context) => ClaimedItemScreen(),
 
         // Settings (fixed name here!)
-        '/settings': (context) => const SettingsPage(),
+        '/settings': (context) => const SettingsScreen(),
         '/edit_profile': (context) => const EditProfileScreen(),
+        '/delete_account': (context) => const DeleteAccountScreen(),
+        '/help': (context) => const HelpFaqsScreen(),
+        'change_password': (context) => const ChangePasswordScreen(),
+        'contact_support': (context) => const ContactSupportScreen(),
+        'about': (context) => const CampusAssistScreen(),
+        'logout': (context) => const LogoutConfirmationScreen(),
+
+        //Messages
+        '/messages': (context) => const MessagesScreen(),
+        '/chatbox': (context) => const ChatScreen(),
+
       },
+
+
+
 
 
     );

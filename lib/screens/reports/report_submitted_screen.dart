@@ -10,6 +10,19 @@ class ReportSubmittedScreen extends StatelessWidget {
       body: Center(
         child: Stack(
           children: [
+
+            // 🔙 Back Button
+
+            Positioned(
+              left: 33,
+              top: 42,
+              child: IconButton(
+                icon: const Icon(Icons.arrow_back, color: Colors.white),
+                onPressed: () => Navigator.pop(context),
+              ),
+            ),
+
+
             // White rounded card starting at top: 185
             Positioned(
               top: 185,
@@ -23,6 +36,8 @@ class ReportSubmittedScreen extends StatelessWidget {
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(50),
                 ),
+
+
                 child: Column(
                   children: [
                     const SizedBox(height: 50),
@@ -126,6 +141,9 @@ class ReportSubmittedScreen extends StatelessWidget {
                     ),
 
                     const SizedBox(height: 32),
+
+
+
                   ],
                 ),
               ),

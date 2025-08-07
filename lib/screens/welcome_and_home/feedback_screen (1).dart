@@ -13,10 +13,12 @@ class _FeedbackPageState extends State<FeedbackPage> {
   bool _submitAnonymously = true;
 
   final List<String> _categories = [
-    'Bug Report',
-    'General Feedback',
-    'UI/UX Improvement',
-    'Performance Issue',
+    'Campus Facilities',
+    'Maintenance Request',
+    'Network & IT',
+    'Transport',
+    'Sanitation',
+    'Security & Safety',
     'Other'
   ];
 
@@ -31,14 +33,14 @@ class _FeedbackPageState extends State<FeedbackPage> {
       return;
     }
 
-    // Handle feedback submission 
+    // Handle feedback submission
     print('Category: $_selectedCategory');
     print('Feedback: ${_feedbackController.text}');
     print('Anonymous: $_submitAnonymously');
 
     // Show success message
     _showSnackBar('Thank you for your feedback!');
-    
+
     // Clear form
     setState(() {
       _selectedCategory = null;
@@ -48,6 +50,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
   }
 
   void _showSnackBar(String message) {
+    if (!mounted) return; // Check if the widget is still in the tree
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
@@ -86,172 +89,175 @@ class _FeedbackPageState extends State<FeedbackPage> {
         ),
         centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'We would love to hear your feedback',
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.black87,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              'Let us hear any issues or suggestions regarding the app or campus',
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.grey[600],
-                height: 1.4,
-              ),
-            ),
-            const SizedBox(height: 32),
-            const Text(
-              'Category',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-                color: Colors.black87,
-              ),
-            ),
-            const SizedBox(height: 12),
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(
-                  color: Colors.grey[300]!,
-                  width: 1,
-                ),
-              ),
-              child: DropdownButtonFormField<String>(
-                value: _selectedCategory,
-                decoration: const InputDecoration(
-                  hintText: 'Select Category',
-                  hintStyle: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 16,
-                  ),
-                  border: InputBorder.none,
-                  contentPadding: EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 16,
-                  ),
-                ),
-                icon: const Icon(
-                  Icons.keyboard_arrow_down,
-                  color: Colors.grey,
-                ),
-                onChanged: (String? newValue) {
-                  setState(() {
-                    _selectedCategory = newValue;
-                  });
-                },
-                items: _categories.map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(
-                      value,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        color: Colors.black87,
-                      ),
-                    ),
-                  );
-                }).toList(),
-              ),
-            ),
-            const SizedBox(height: 24),
-            const Text(
-              'Feedback',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-                color: Colors.black87,
-              ),
-            ),
-            const SizedBox(height: 12),
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(
-                  color: Colors.grey[300]!,
-                  width: 1,
-                ),
-              ),
-              child: TextField(
-                controller: _feedbackController,
-                maxLines: 6,
-                decoration: const InputDecoration(
-                  hintText: 'Enter your feedback',
-                  hintStyle: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 16,
-                  ),
-                  border: InputBorder.none,
-                  contentPadding: EdgeInsets.all(16),
-                ),
-                style: const TextStyle(
+      body: SingleChildScrollView( // Added SingleChildScrollView
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'We would love to hear your feedback',
+                style: TextStyle(
                   fontSize: 16,
+                  color: Colors.black87,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'Let us hear any issues or suggestions regarding the app or campus',
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.grey[600],
+                  height: 1.4,
+                ),
+              ),
+              const SizedBox(height: 32),
+              const Text(
+                'Category',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
                   color: Colors.black87,
                 ),
               ),
-            ),
-            const SizedBox(height: 24),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  'Submit Anonymously',
-                  style: TextStyle(
+              const SizedBox(height: 12),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(
+                    color: Colors.grey[300]!,
+                    width: 1,
+                  ),
+                ),
+                child: DropdownButtonFormField<String>(
+                  value: _selectedCategory,
+                  decoration: const InputDecoration(
+                    hintText: 'Select Category',
+                    hintStyle: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 16,
+                    ),
+                    border: InputBorder.none,
+                    contentPadding: EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 16,
+                    ),
+                  ),
+                  icon: const Icon(
+                    Icons.keyboard_arrow_down,
+                    color: Colors.grey,
+                  ),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      _selectedCategory = newValue;
+                    });
+                  },
+                  items: _categories.map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(
+                        value,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          color: Colors.black87,
+                        ),
+                      ),
+                    );
+                  }).toList(),
+                ),
+              ),
+              const SizedBox(height: 24),
+              const Text(
+                'Feedback',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.black87,
+                ),
+              ),
+              const SizedBox(height: 12),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(
+                    color: Colors.grey[300]!,
+                    width: 1,
+                  ),
+                ),
+                child: TextField(
+                  controller: _feedbackController,
+                  maxLines: 6,
+                  decoration: const InputDecoration(
+                    hintText: 'Enter your feedback',
+                    hintStyle: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 16,
+                    ),
+                    border: InputBorder.none,
+                    contentPadding: EdgeInsets.all(16),
+                  ),
+                  style: const TextStyle(
                     fontSize: 16,
-                    fontWeight: FontWeight.w600,
                     color: Colors.black87,
                   ),
                 ),
-                Switch(
-                  value: _submitAnonymously,
-                  onChanged: (bool value) {
-                    setState(() {
-                      _submitAnonymously = value;
-                    });
-                  },
-                  activeColor: Colors.white,
-                  activeTrackColor: const Color(0xFF1F41BB),
-                  inactiveThumbColor: Colors.white,
-                  inactiveTrackColor: Colors.grey[300],
-                ),
-              ],
-            ),
-            const Spacer(),
-            SizedBox(
-              width: double.infinity,
-              height: 52,
-              child: ElevatedButton(
-                onPressed: _submitFeedback,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF1F41BB),
-                  foregroundColor: Colors.white,
-                  elevation: 0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+              ),
+              const SizedBox(height: 24),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    'Submit Anonymously',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black87,
+                    ),
                   ),
-                ),
-                child: const Text(
-                  'Submit',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
+                  Switch(
+                    value: _submitAnonymously,
+                    onChanged: (bool value) {
+                      setState(() {
+                        _submitAnonymously = value;
+                      });
+                    },
+                    activeColor: Colors.white,
+                    activeTrackColor: const Color(0xFF1F41BB),
+                    inactiveThumbColor: Colors.white,
+                    inactiveTrackColor: Colors.grey[300],
+                  ),
+                ],
+              ),
+              // Removed Spacer and added SizedBox for spacing before the button
+              const SizedBox(height: 48),
+              SizedBox(
+                width: double.infinity,
+                height: 52,
+                child: ElevatedButton(
+                  onPressed: _submitFeedback,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF1F41BB),
+                    foregroundColor: Colors.white,
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  child: const Text(
+                    'Submit',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
               ),
-            ),
-            const SizedBox(height: 20),
-          ],
+              const SizedBox(height: 20), // Padding at the bottom of the scrollable content
+            ],
+          ),
         ),
       ),
     );

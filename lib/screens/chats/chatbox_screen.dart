@@ -1,217 +1,213 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class ChatScreen extends StatelessWidget {
-  const ChatScreen({super.key});
+class ChatScreen extends StatefulWidget {
+  final String userName;
+  final String userPhone;
+  final String userImage;
+
+  const ChatScreen({
+    super.key,
+    required this.userName,
+    required this.userPhone,
+    required this.userImage,
+  });
+
+  @override
+  State<ChatScreen> createState() => _ChatScreenState();
+}
+
+class _ChatScreenState extends State<ChatScreen> {
+  final TextEditingController _controller = TextEditingController();
+
+  final List<Map<String, dynamic>> _messages = []; // start empty
+
+  void _sendMessage() {
+    if (_controller.text.trim().isEmpty) return;
+    setState(() {
+      _messages.add({
+        'text': _controller.text.trim(),
+        'isSentByMe': true,
+      });
+      _controller.clear();
+    });
+  }
+
+  void _makeCallConfirmation() async {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text("Make a call"),
+        content: Text("Do you want to call ${widget.userName}?"),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: const Text("Cancel"),
+          ),
+          TextButton(
+            onPressed: () async {
+              Navigator.pop(ctx);
+              final Uri phoneUri = Uri.parse('tel:${widget.userPhone}');
+              if (await canLaunchUrl(phoneUri)) {
+                await launchUrl(phoneUri);
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text("Cannot make the call")),
+                );
+              }
+            },
+            child: const Text("Call"),
+          ),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: ShapeDecoration(
-          color: Colors.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(50),
-          ),
-        ),
+      body: SafeArea(
         child: Stack(
           children: [
-            // Profile Image
+            // Header - back, avatar, name, status, call
             Positioned(
-              left: 83,
+              top: 60,
+              left: 20,
+              child: GestureDetector(
+                onTap: () => Navigator.pop(context),
+                child: const Icon(Icons.arrow_back, color: Colors.black, size: 30),
+              ),
+            ),
+            Positioned(
               top: 50,
-              child: Container(
-                width: 55,
-                height: 49,
-                decoration: ShapeDecoration(
-                  image: const DecorationImage(
-                    image: NetworkImage("https://placehold.co/55x49"),
-                    fit: BoxFit.cover,
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(64),
-                  ),
-                ),
+              left: 83,
+              child: CircleAvatar(
+                radius: 25,
+                backgroundImage: NetworkImage(widget.userImage),
               ),
             ),
-
-            // Name
-            const Positioned(
-              left: 154,
+            Positioned(
               top: 56,
-              child: SizedBox(
-                width: 111,
-                child: Text(
-                  'John Doe',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 16,
-                    fontFamily: 'Inter',
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
-            ),
-
-            // Online Status
-            const Positioned(
               left: 154,
-              top: 78,
-              child: SizedBox(
-                width: 93,
-                child: Text(
-                  'Online',
-                  style: TextStyle(
-                    color: Color(0xFFA7A7AC),
-                    fontSize: 14,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-              ),
-            ),
-
-            // Message 1 - Sent
-            Positioned(
-              left: 100,
-              top: 132,
-              child: Container(
-                width: 306,
-                height: 62,
-                decoration: BoxDecoration(
-                  color: const Color(0xFF8399E1),
-                  borderRadius: BorderRadius.circular(14),
-                ),
-                child: const Padding(
-                  padding: EdgeInsets.all(14.0),
-                  child: Text(
-                    'Hi, i believe you found my backpack. I can provide proof of ownership',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w500,
-                      height: 1.21,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-
-            // Message 2 - Received
-            Positioned(
-              left: 22,
-              top: 213,
-              child: Container(
-                width: 302,
-                height: 52,
-                decoration: BoxDecoration(
-                  color: const Color(0xFFF4F4FA),
-                  borderRadius: BorderRadius.circular(14),
-                ),
-                child: const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 14.0, vertical: 12),
-                  child: Text(
-                    'Hello, yes i have it. Please describe it to me',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 14,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w400,
-                      height: 1.21,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-
-            // Message 3 - Sent
-            Positioned(
-              left: 100,
-              top: 284,
-              child: Container(
-                width: 306,
-                height: 72,
-                decoration: BoxDecoration(
-                  color: const Color(0xFF8399E1),
-                  borderRadius: BorderRadius.circular(14),
-                ),
-                child: const Padding(
-                  padding: EdgeInsets.all(14.0),
-                  child: Text(
-                    'It is blue bag with a torn side pocket and something and another thing and a lot of books in it ',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w500,
-                      height: 1.21,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-
-            // Message 4 - Received
-            Positioned(
-              left: 22,
-              top: 374,
-              child: Container(
-                width: 302,
-                height: 52,
-                decoration: BoxDecoration(
-                  color: const Color(0xFFF4F4FA),
-                  borderRadius: BorderRadius.circular(14),
-                ),
-                child: const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 14.0, vertical: 12),
-                  child: Text(
-                    'That’s correct. Where can you meet me to pick it up?',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 14,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w400,
-                      height: 1.21,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-
-            // Message input field
-            Positioned(
-              left: 29,
-              bottom: 24,
-              child: Container(
-                width: 337,
-                height: 39,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(
-                    color: const Color(0xFFC7C7C7),
-                    width: 1,
-                  ),
-                ),
-              ),
-            ),
-
-            // Placeholder text
-            const Positioned(
-              left: 49,
-              bottom: 32,
               child: Text(
-                'Type something here',
+                widget.userName,
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 16,
+                  fontFamily: 'Inter',
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+            const Positioned(
+              top: 78,
+              left: 154,
+              child: Text(
+                'Online',
                 style: TextStyle(
-                  color: Color(0xFFA8A8A8),
+                  color: Color(0xFFA7A7AC),
                   fontSize: 14,
                   fontFamily: 'Poppins',
                   fontWeight: FontWeight.w400,
-                  height: 1.21,
                 ),
+              ),
+            ),
+            // Call icon
+            Positioned(
+              top: 60,
+              right: 20,
+              child: GestureDetector(
+                onTap: _makeCallConfirmation,
+                child: const Icon(Icons.phone, color: Colors.black, size: 26),
+              ),
+            ),
+
+            // Message List
+            Positioned.fill(
+              top: 110,
+              bottom: 80,
+              left: 0,
+              right: 0,
+              child: _messages.isEmpty
+                  ? const Center(
+                child: Text(
+                  "Start a new conversation",
+                  style: TextStyle(
+                    fontFamily: 'Poppins',
+                    fontSize: 16,
+                    color: Colors.grey,
+                  ),
+                ),
+              )
+                  : ListView.builder(
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                itemCount: _messages.length,
+                itemBuilder: (context, index) {
+                  final msg = _messages[index];
+                  final isSent = msg['isSentByMe'] as bool;
+                  return Align(
+                    alignment: isSent ? Alignment.centerRight : Alignment.centerLeft,
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(vertical: 6),
+                      padding: const EdgeInsets.all(14),
+                      constraints: const BoxConstraints(maxWidth: 300),
+                      decoration: BoxDecoration(
+                        color: isSent ? const Color(0xFF8399E1) : const Color(0xFFF4F4FA),
+                        borderRadius: BorderRadius.circular(14),
+                      ),
+                      child: Text(
+                        msg['text'],
+                        style: TextStyle(
+                          color: isSent ? Colors.white : Colors.black,
+                          fontSize: 14,
+                          fontFamily: 'Poppins',
+                          fontWeight: isSent ? FontWeight.w500 : FontWeight.w400,
+                          height: 1.21,
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+
+            // Input Box
+            Positioned(
+              bottom: 20,
+              left: 20,
+              right: 20,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      height: 44,
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(color: const Color(0xFFC7C7C7)),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: TextField(
+                        controller: _controller,
+                        decoration: const InputDecoration(
+                          border: InputBorder.none,
+                          hintText: 'Type something here',
+                          hintStyle: TextStyle(
+                            fontFamily: 'Poppins',
+                            fontSize: 14,
+                            color: Color(0xFFA8A8A8),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  GestureDetector(
+                    onTap: _sendMessage,
+                    child: const Icon(Icons.send, color: Color(0xFF1F41BB)),
+                  ),
+                ],
               ),
             ),
           ],

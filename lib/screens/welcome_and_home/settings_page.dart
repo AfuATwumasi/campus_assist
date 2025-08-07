@@ -6,6 +6,7 @@ import '../profile/contact_support.dart';
 import '../profile/change_password.dart';
 import '../profile/logout_screen.dart';
 import '../profile/about_screen.dart';
+import '../profile/profile_info_screen.dart';
 import 'home_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -24,6 +25,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return Scaffold(
       backgroundColor: const Color(0xFF1F41BB),
       body: SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
         child: Column(
           children: [
             const SizedBox(height: kToolbarHeight - 50),
@@ -249,7 +251,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const EditProfileScreen(),
+              builder: (context) => const ProfileInfoScreen(),
             ),
           );
         } else if (text == 'Change password') {
@@ -259,6 +261,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
               builder: (context) => const ChangePasswordScreen(),
             ),
           );
+
+        } else if (text == 'Edit Profile') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const EditProfileScreen(),
+            ),
+          );
+
         } else if (text == 'Help & FAQs') {
           Navigator.push(
             context,

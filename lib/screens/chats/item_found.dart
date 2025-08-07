@@ -18,12 +18,13 @@ class FoundItemDetailsScreen extends StatelessWidget {
               width: 52,
               height: 55,
               clipBehavior: Clip.antiAlias,
-              decoration: BoxDecoration(),
+              decoration: const BoxDecoration(),
               child: IconButton(
-                icon: Icon(Icons.arrow_back, color: Colors.white, size: 28),
+                icon: const Icon(Icons.arrow_back, color: Colors.white, size: 28),
                 onPressed: () {
-                  Navigator.pop(context);
+                  Navigator.pop(context); // Functional back button
                 },
+                tooltip: 'Back',
               ),
             ),
           ),
@@ -117,7 +118,7 @@ class FoundItemDetailsScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 24),
+                    const SizedBox(height: 44),
 
                     _buildDetailRow(
                       icon: Icons.location_on_outlined,
@@ -146,12 +147,12 @@ class FoundItemDetailsScreen extends StatelessWidget {
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFF1F41BB),
+                          foregroundColor: Colors.white,
                           padding: const EdgeInsets.symmetric(vertical: 16),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16),
                           ),
                           textStyle: const TextStyle(
-                            color: Colors.white,
                             fontSize: 22,
                             fontFamily: 'Poppins',
                             fontWeight: FontWeight.w500,
@@ -161,15 +162,14 @@ class FoundItemDetailsScreen extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) =>
-                              const ClaimedItemScreen(),
+                              builder: (context) => const ClaimedItemScreen(),
                             ),
                           );
                         },
                         child: const Text('Claim'),
                       ),
                     ),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 20),
                   ],
                 ),
               ),
@@ -180,7 +180,6 @@ class FoundItemDetailsScreen extends StatelessWidget {
     );
   }
 
-  // Detail row helper
   Widget _buildDetailRow({
     required IconData icon,
     required String label,
@@ -205,14 +204,17 @@ class FoundItemDetailsScreen extends StatelessWidget {
             children: [
               Icon(icon, color: Colors.black54, size: 18),
               const SizedBox(width: 8),
-              Text(
-                value,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 16,
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.w400,
+              Flexible( // ✅ Fixes overflow
+                child: Text(
+                  value,
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w400,
+                  ),
                 ),
               ),
             ],

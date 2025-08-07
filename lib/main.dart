@@ -36,6 +36,7 @@ import 'screens/profile/change_password.dart';
 import 'screens/profile/contact_support.dart';
 import 'screens/profile/about_screen.dart';
 import 'screens/profile/logout_screen.dart';
+import 'screens/profile/profile_info_screen.dart';
 
 //Chats
 import 'screens/chats/message_screen.dart';
@@ -93,6 +94,7 @@ routes: {
         // Settings (fixed name here!)
         '/settings': (context) => const SettingsScreen(),
         '/edit_profile': (context) => const EditProfileScreen(),
+        '/profile_info': (context) => const ProfileInfoScreen(),
         '/delete_account': (context) => const DeleteAccountScreen(),
         '/help': (context) => const HelpFaqsScreen(),
         'change_password': (context) => const ChangePasswordScreen(),
@@ -102,7 +104,7 @@ routes: {
 
         //Messages
         '/messages': (context) => const MessagesScreen(),
-        '/chatbox': (context) => const ChatScreen(),
+        '/chatbox': (context) => const ChatScreen(userName: '', userPhone: '', userImage: '',),
 
       },
 

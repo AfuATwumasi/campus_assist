@@ -53,25 +53,27 @@ class CampusLostFoundScreen extends StatelessWidget {
                 context,
                 title: "Lost Item Report",
                 description:
-                    "Submit details about something you've misplaced on campus.",
+                "Submit details about something you've misplaced on campus.",
                 routeName: '/lost_form',
+                imageAssetPath: 'assets/images/locate.png',
               ),
               const SizedBox(height: 16),
               _buildOptionCard(
                 context,
                 title: "Browse found items",
                 description:
-                    "Check items others have found to see if yours has been listed.",
+                "Check items others have found to see if yours has been listed.",
                 routeName: '/browse_items',
-                trailing: const Icon(Icons.menu, color: Colors.black87),
+                imageAssetPath: 'assets/images/browse.png',
               ),
               const SizedBox(height: 16),
               _buildOptionCard(
                 context,
                 title: "Found item form",
                 description:
-                    "Report an item you've discovered so the owner can find it.",
+                "Report an item you've discovered so the owner can find it.",
                 routeName: '/found_form',
+                imageAssetPath: 'assets/images/found.png',
               ),
             ],
           ),
@@ -81,12 +83,13 @@ class CampusLostFoundScreen extends StatelessWidget {
   }
 
   Widget _buildOptionCard(
-    BuildContext context, {
-    required String title,
-    required String description,
-    required String routeName,
-    Widget? trailing,
-  }) {
+      BuildContext context, {
+        required String title,
+        required String description,
+        required String routeName,
+        Widget? trailing,
+        String? imageAssetPath,
+      }) {
     return GestureDetector(
       onTap: () => Navigator.pushNamed(context, routeName),
       child: Container(
@@ -96,7 +99,16 @@ class CampusLostFoundScreen extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
         ),
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            if (imageAssetPath != null) ...[
+              Image.asset(
+                imageAssetPath,
+                width: 36,
+                height: 36,
+              ),
+              const SizedBox(width: 16),
+            ],
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -120,7 +132,10 @@ class CampusLostFoundScreen extends StatelessWidget {
                 ],
               ),
             ),
-            if (trailing != null) ...[const SizedBox(width: 12), trailing],
+            if (trailing != null) ...[
+              const SizedBox(width: 12),
+              trailing,
+            ],
           ],
         ),
       ),

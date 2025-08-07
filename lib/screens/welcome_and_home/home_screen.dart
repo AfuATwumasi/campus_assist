@@ -1,4 +1,12 @@
+import 'package:campus_assist/screens/profile/profile_info_screen.dart';
 import 'package:flutter/material.dart';
+
+// 1. IMPORT YOUR PROFILE SCREEN FILE HERE
+// Example: import 'profile_screen.dart';
+// Make sure the path is correct based on your project structure.
+// If you haven't created it yet, this line will show an error.
+// For now, I'll comment it out. Replace with your actual import.
+// import 'profile_screen.dart';
 
 class CampusSafetyHomePage extends StatelessWidget {
   const CampusSafetyHomePage({Key? key}) : super(key: key);
@@ -16,7 +24,7 @@ class CampusSafetyHomePage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 30),
 
                   // Profile section
                   Row(
@@ -47,39 +55,59 @@ class CampusSafetyHomePage extends StatelessWidget {
                       ),
                       const Spacer(),
 
-                      // Good morning section
+                      // Welcome section
                       Row(
                         children: [
-                          Container(
-                            width: 30,
-                            height: 30,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              border: Border.all(
-                                color: Colors.grey.withOpacity(0.3),
-                                width: 1,
+                          // --- MODIFIED PROFILE IMAGE BUTTON ---
+                          GestureDetector( // Added GestureDetector
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => const ProfileInfoScreen()),
+                              );
+
+                              print("Profile image tapped! Navigate to ProfileScreen."); // For debugging
+                            },
+                            child: Container(
+                              width: 30,
+                              height: 30,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: Colors.grey.withOpacity(0.3),
+                                  width: 1,
+                                ),
+                                // Optional: Add a subtle shadow for better affordance
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.15),
+                                    spreadRadius: 0.5,
+                                    blurRadius: 2,
+                                    offset: const Offset(0, 1),
+                                  ),
+                                ],
                               ),
-                            ),
-                            child: ClipOval(
-                              child: Image.asset(
-                                'assets/images/gg_profile.png',
-                                width: 30,
-                                height: 30,
-                                fit: BoxFit.cover,
+                              child: ClipOval(
+                                child: Image.asset(
+                                  'assets/images/gg_profile.png', // Ensure this path is correct
+                                  width: 30,
+                                  height: 30,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                           ),
+                          // --- END OF MODIFIED PROFILE IMAGE BUTTON ---
                           const SizedBox(width: 8),
                           const Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Good morning',
-                                style: TextStyle(fontSize: 12, color: Colors.grey),
-                              ),
-                              Text(
-                                'Jessica',
-                                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
+                                'Welcome',
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black),
                               ),
                             ],
                           ),
@@ -87,34 +115,7 @@ class CampusSafetyHomePage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 25),
-
-                  // Search bar
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 12),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(25),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.1),
-                          spreadRadius: 1,
-                          blurRadius: 5,
-                          offset: const Offset(0, 2),
-                        ),
-                      ],
-                    ),
-                    child: const Row(
-                      children: [
-                        Icon(Icons.search, color: Colors.grey, size: 20),
-                        SizedBox(width: 10),
-                        Text(
-                          'Search campus safety tools',
-                          style: TextStyle(color: Colors.grey, fontSize: 14),
-                        ),
-                      ],
-                    ),
-                  ),
+                  const SizedBox(height: 45),
                 ],
               ),
             ),
@@ -146,7 +147,10 @@ class CampusSafetyHomePage extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Image.asset('assets/images/report.png', width: 24, height: 24, color: const Color(0xFF1F41BB)),
+                                  Image.asset('assets/images/report.png',
+                                      width: 24,
+                                      height: 24,
+                                      color: const Color(0xFF1F41BB)),
                                   const Spacer(),
                                   const Text(
                                     'Report\nIncident',
@@ -181,7 +185,8 @@ class CampusSafetyHomePage extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Image.asset('assets/images/alert.png', width: 24, height: 24, color: Colors.black),
+                                  Image.asset('assets/images/alert.png',
+                                      width: 24, height: 24, color: Colors.black),
                                   const Spacer(),
                                   const Text(
                                     'Campus\nAlert',
@@ -220,12 +225,17 @@ class CampusSafetyHomePage extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Image.asset('assets/images/feedback_image.png', width: 24, height: 24, color: Colors.white),
+                                  Image.asset(
+                                      'assets/images/feedback_image.png',
+                                      width: 24,
+                                      height: 24,
+                                      color: Colors.black),
                                   const Spacer(),
                                   const Text(
                                     'Feedback',
                                     style: TextStyle(
-                                      color: Color(0xFF121217),
+                                      // Changed text color to white for better contrast
+                                      color: Colors.black,
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -242,7 +252,7 @@ class CampusSafetyHomePage extends StatelessWidget {
                               Navigator.pushNamed(context, '/lost_found');
                             },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFF4869D3),
+                              backgroundColor: const Color(0xFF8298DF), // Mid-tone blue
                               padding: EdgeInsets.zero,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(14),
@@ -252,14 +262,21 @@ class CampusSafetyHomePage extends StatelessWidget {
                             child: Container(
                               height: 120,
                               padding: const EdgeInsets.all(15),
-                              child: const Column(
+                              child: Column( // Column to stack Image and Text
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  Text(
+                                  // --- IMAGE ADDED HERE ---
+                                  Image.asset(
+                                    'assets/images/lost.png', // Replace with your actual image path
+                                    width: 24, // Adjust size as needed
+                                    height: 24, // Adjust size as needed
+                                    //color: Colors.white, // Make icon white for contrast
+                                  ),
+                                  const Spacer(), // Pushes the text to the bottom
+                                  const Text(
                                     'Lost and\nfound',
                                     style: TextStyle(
-                                      color: Color(0xFF121217),
+                                      color: Colors.black, // Changed to white for better contrast
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -276,7 +293,10 @@ class CampusSafetyHomePage extends StatelessWidget {
                       alignment: Alignment.centerLeft,
                       child: Text(
                         'Recent Activities',
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black),
                       ),
                     ),
                     const SizedBox(height: 15),
@@ -302,12 +322,14 @@ class CampusSafetyHomePage extends StatelessWidget {
                               Expanded(
                                 child: Text(
                                   'An alert has been issued regarding weather conditions. Stay safe!',
-                                  style: TextStyle(fontSize: 14, color: Colors.black87),
+                                  style: TextStyle(
+                                      fontSize: 14, color: Colors.black87),
                                 ),
                               ),
                               Text(
                                 '2 hours ago',
-                                style: TextStyle(fontSize: 12, color: Colors.grey),
+                                style:
+                                TextStyle(fontSize: 12, color: Colors.grey),
                               ),
                             ],
                           ),
@@ -320,19 +342,21 @@ class CampusSafetyHomePage extends StatelessWidget {
                               Expanded(
                                 child: Text(
                                   'Lost item reported near the library. Check the lost and found section',
-                                  style: TextStyle(fontSize: 14, color: Colors.black87),
+                                  style: TextStyle(
+                                      fontSize: 14, color: Colors.black87),
                                 ),
                               ),
                               Text(
                                 '4 hours ago',
-                                style: TextStyle(fontSize: 12, color: Colors.grey),
+                                style:
+                                TextStyle(fontSize: 12, color: Colors.grey),
                               ),
                             ],
                           ),
                         ],
                       ),
                     ),
-                    const Spacer(),
+                    const Spacer(), // Pushes recent activities up if list is short
                   ],
                 ),
               ),
@@ -357,17 +381,23 @@ class CampusSafetyHomePage extends StatelessWidget {
                 children: [
                   Expanded(
                     child: IconButton(
-                      icon: Image.asset('assets/images/home_icon.png', width: 24, height: 24),
+                      icon: Image.asset('assets/images/home_icon.png',
+                          width: 24, height: 24),
                       onPressed: () {
-                        Navigator.pushNamed(context, '/home');
+                        // Avoid pushing if already on home, or use pushReplacementNamed
+                        if (ModalRoute.of(context)?.settings.name != '/home') {
+                          Navigator.pushNamed(context, '/home');
+                        }
                       },
                       tooltip: 'Home',
                     ),
                   ),
-
                   Expanded(
                     child: IconButton(
-                      icon: Image.asset('assets/images/alert.png', width: 24, height: 24),
+                      icon: Image.asset(
+                          'assets/images/material-symbols-light_add-box-outline.png',
+                          width: 24,
+                          height: 24),
                       onPressed: () {
                         Navigator.pushNamed(context, '/new_report');
                       },
@@ -376,7 +406,8 @@ class CampusSafetyHomePage extends StatelessWidget {
                   ),
                   Expanded(
                     child: IconButton(
-                      icon: Image.asset('assets/images/messages_icon.png', width: 24, height: 24),
+                      icon: Image.asset('assets/images/messages_icon.png',
+                          width: 24, height: 24),
                       onPressed: () {
                         Navigator.pushNamed(context, '/messages');
                       },
@@ -385,7 +416,8 @@ class CampusSafetyHomePage extends StatelessWidget {
                   ),
                   Expanded(
                     child: IconButton(
-                      icon: Image.asset('assets/images/settings_icon.png', width: 24, height: 24),
+                      icon: Image.asset('assets/images/settings_icon.png',
+                          width: 24, height: 24),
                       onPressed: () {
                         Navigator.pushNamed(context, '/settings');
                       },
@@ -401,3 +433,29 @@ class CampusSafetyHomePage extends StatelessWidget {
     );
   }
 }
+
+// 2. DEFINE YOUR PROFILE SCREEN WIDGET (Ideally in a separate file like profile_screen.dart)
+// For demonstration, I'm putting a placeholder here.
+// You should create a proper 'profile_screen.dart' and import it above.
+
+/*
+class ProfileScreen extends StatelessWidget {
+  const ProfileScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('My Profile'),
+        backgroundColor: const Color(0xFF1F41BB), // Example color
+      ),
+      body: const Center(
+        child: Text(
+          'Profile Details Page',
+          style: TextStyle(fontSize: 24),
+        ),
+      ),
+    );
+  }
+}
+*/

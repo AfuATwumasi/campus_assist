@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
 
 class BrowseFoundItemsScreen extends StatelessWidget {
@@ -8,116 +6,120 @@ class BrowseFoundItemsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF1F41BB),
-      body: Container(
-        width: 428,
-        height: 926,
-        clipBehavior: Clip.antiAlias,
-        decoration: ShapeDecoration(
-          color: const Color(0xFF1F41BB),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(50),
-          ),
-        ),
-        child: Stack(
-          children: [
-            Positioned(
-              left: 0,
-              top: 158,
-              child: Container(
-                width: 428,
-                height: 768,
-                clipBehavior: Clip.antiAlias,
-                decoration: ShapeDecoration(
-                  color: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(50),
-                      bottomRight: Radius.circular(50),
-                    ),
-                  ),
-                ),
-                child: Stack(
-                  children: [
-                    Positioned(
-                      left: 18,
-                      top: 26,
-                      child: FoundItemCard(
-                        context: context,
-                        itemName: 'Blue Backpack',
-                        description: 'A blue backpack with black zippers and a front pocket.',
-                        location: 'Building A',
-                        date: 'June 20, 2025',
-                      ),
-                    ),
-                    Positioned(
-                      left: 18,
-                      top: 177,
-                      child: FoundItemCard(
-                        context: context,
-                        itemName: 'Water Bottle',
-                        description: 'Silver reusable water bottle with stickers.',
-                        location: 'Library',
-                        date: 'June 21, 2025',
-                      ),
-                    ),
-                    Positioned(
-                      left: 18,
-                      top: 328,
-                      child: FoundItemCard(
-                        context: context,
-                        itemName: 'Black Umbrella',
-                        description: 'Black foldable umbrella with a curved handle.',
-                        location: 'Cafeteria',
-                        date: 'June 22, 2025',
-                      ),
-                    ),
-                    Positioned(
-                      left: 18,
-                      top: 479,
-                      child: FoundItemCard(
-                        context: context,
-                        itemName: 'Calculator',
-                        description: 'Casio scientific calculator with name label.',
-                        location: 'Room 204',
-                        date: 'June 23, 2025',
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+      backgroundColor: const Color(0xFF1F41BB),
+      body: Stack(
+        children: [
+          Positioned(
+            top: 60,
+            left: 20,
+            child: GestureDetector(
+              onTap: () => Navigator.pop(context),
+              child: Icon(Icons.arrow_back, color: Colors.white, size: 30),
             ),
-            Positioned(
-              top: 60,
-              left: 100,
-              right: 100,
+          ),
+          Positioned(
+            top: 60,
+            left: 0,
+            right: 0,
+            child: Center(
               child: Text(
                 'Browse Found Items',
-                textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 26,
+                  fontSize: 24,
                   fontFamily: 'Poppins',
-                  fontWeight: FontWeight.w700,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+          Positioned(
+            top: 110,
+            left: 44,
+            right: 44,
+            child: Container(
+              height: 44,
+              padding: EdgeInsets.symmetric(horizontal: 12),
+              decoration: BoxDecoration(
+                color: Color(0xFFC4CFF5),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Row(
+                children: [
+                  Icon(Icons.search, color: Colors.black54),
+                  SizedBox(width: 10),
+                  Expanded(
+                    child: TextField(
+                      style: TextStyle(fontFamily: 'Poppins'),
+                      decoration: InputDecoration(
+                        hintText: 'Search items here',
+                        border: InputBorder.none,
+                        hintStyle: TextStyle(color: Colors.black54),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Positioned(
+            top: 170,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: Container(
+              padding: EdgeInsets.only(top: 20),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(50),
+                  topRight: Radius.circular(50),
+                ),
+              ),
+              child: ListView(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                children: [
+                  FoundItemCard(
+                    itemName: 'Blue Backpack',
+                    description: 'Description of the found item',
+                    location: 'Building A',
+                    date: 'July 21, 2025',
+                  ),
+                  FoundItemCard(
+                    itemName: 'Item Name',
+                    description: 'Description of the found item',
+                    location: 'Building A',
+                    date: 'July 21, 2025',
+                  ),
+                  FoundItemCard(
+                    itemName: 'Item Name',
+                    description: 'Description of the found item',
+                    location: 'Building A',
+                    date: 'July 21, 2025',
+                  ),
+                  FoundItemCard(
+                    itemName: 'Item Name',
+                    description: 'Description of the found item',
+                    location: 'Building A',
+                    date: 'July 21, 2025',
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
 }
 
 class FoundItemCard extends StatelessWidget {
-  final BuildContext context;
   final String itemName;
   final String description;
   final String location;
   final String date;
 
   const FoundItemCard({
-    required this.context,
     required this.itemName,
     required this.description,
     required this.location,
@@ -128,114 +130,90 @@ class FoundItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 401,
-      height: 128,
-      decoration: ShapeDecoration(
-        color: const Color(0xFFFAF8F8),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(9)),
+      margin: EdgeInsets.only(bottom: 16),
+      padding: EdgeInsets.all(12),
+      height: 120,
+      decoration: BoxDecoration(
+        color: Color(0xFFFAF8F8),
+        borderRadius: BorderRadius.circular(9),
       ),
-      child: Stack(
+      child: Row(
         children: [
-          Positioned(
-            left: 18,
-            top: 15,
-            child: Container(
-              width: 69,
-              height: 67,
-              decoration: ShapeDecoration(
-                color: const Color(0xFFD9D9D9),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
-              ),
+          Container(
+            width: 60,
+            height: 60,
+            decoration: BoxDecoration(
+              color: Color(0xFFD9D9D9),
+              borderRadius: BorderRadius.circular(6),
             ),
           ),
-          Positioned(
-            left: 10,
-            top: 91,
-            child: SizedBox(
-              width: 84,
-              height: 15,
-              child: Text(
-                location,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 14,
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-            ),
-          ),
-          Positioned(
-            left: 100,
-            top: 10,
-            child: Text(
-              itemName,
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 16,
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ),
-          Positioned(
-            left: 100,
-            top: 40,
-            child: SizedBox(
-              width: 282,
-              child: Text(
-                description,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 15,
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.w300,
-                ),
-              ),
-            ),
-          ),
-          Positioned(
-            left: 100,
-            top: 91,
-            child: Text(
-              date,
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 14,
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-          ),
-          Positioned(
-            left: 300,
-            top: 90,
-            child: GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(context, '/item_found');
-              },
-              child: Container(
-                width: 94,
-                height: 23,
-                decoration: ShapeDecoration(
-                  color: const Color(0xFF1F41BB),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(11),
+          SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  itemName,
+                  style: TextStyle(
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
                   ),
                 ),
-                child: Center(
-                  child: Text(
-                    'Claim',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w500,
+                SizedBox(height: 4),
+                Text(
+                  description,
+                  style: TextStyle(
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w300,
+                    fontSize: 14,
+                  ),
+                ),
+                Spacer(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      location,
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                        fontSize: 13,
+                      ),
                     ),
-                  ),
-                ),
-              ),
+                    Text(
+                      date,
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                        fontSize: 13,
+                      ),
+                    ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color(0xFF1F41BB),
+                        minimumSize: Size(70, 30),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        padding: EdgeInsets.zero,
+                        // Add foregroundColor for the text
+                        foregroundColor: Colors.white, // <<< THIS IS THE ONLY CHANGE
+                      ),
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/item_found');
+                      },
+                      child: Text(
+                        'Retrieve',
+                        style: TextStyle(
+                          // color: Colors.white, // This line is now effectively handled by foregroundColor
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 13,
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+              ],
             ),
           ),
         ],

@@ -51,6 +51,8 @@ class ClaimedItemScreen extends StatelessWidget {
                         ),
                       ),
                     ),
+
+
                     Positioned(
                       left: 26,
                       top: 269,
@@ -88,16 +90,22 @@ class ClaimedItemScreen extends StatelessWidget {
                         ),
                       ),
                     ),
+                    // Submit Button
                     Positioned(
                       left: 66,
                       top: 547,
-                      child: Container(
-                        width: 306,
-                        height: 44,
-                        decoration: ShapeDecoration(
-                          color: Color(0xFF1F41BB),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(11),
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(context, '/chatbox');
+                        },
+                        child: Container(
+                          width: 306,
+                          height: 44,
+                          decoration: ShapeDecoration(
+                            color: Color(0xFF1F41BB),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(11),
+                            ),
                           ),
                         ),
                       ),
@@ -119,20 +127,26 @@ class ClaimedItemScreen extends StatelessWidget {
                         ),
                       ),
                     ),
+                    // Cancel Button
                     Positioned(
                       left: 66,
                       top: 614,
-                      child: Container(
-                        width: 306,
-                        height: 44,
-                        decoration: ShapeDecoration(
-                          color: Colors.white,
-                          shape: RoundedRectangleBorder(
-                            side: BorderSide(
-                              width: 1,
-                              color: Color(0xFFBEBEBE),
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Container(
+                          width: 306,
+                          height: 44,
+                          decoration: ShapeDecoration(
+                            color: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              side: BorderSide(
+                                width: 1,
+                                color: Color(0xFFBEBEBE),
+                              ),
+                              borderRadius: BorderRadius.circular(11),
                             ),
-                            borderRadius: BorderRadius.circular(11),
                           ),
                         ),
                       ),
@@ -150,12 +164,10 @@ class ClaimedItemScreen extends StatelessWidget {
                             fontSize: 24,
                             fontFamily: 'Poppins',
                             fontWeight: FontWeight.w500,
-
                           ),
                         ),
                       ),
                     ),
-
                     Positioned(
                       left: 19,
                       top: 688,

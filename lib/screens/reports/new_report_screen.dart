@@ -83,7 +83,7 @@ class _NewReportScreenState extends State<NewReportScreen> {
                   ),
                   value: incidentType,
                   isExpanded: true,
-                  items: ['Harassment', 'Theft', 'Vandalism']
+                  items: ['Harassment', 'Theft', 'Vandalism', 'Other']
                       .map(
                         (type) =>
                             DropdownMenuItem(value: type, child: Text(type)),

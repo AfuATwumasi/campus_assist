@@ -11,6 +11,9 @@ dependencies:
   flutter:
     sdk: flutter
 
+  url_launcher: ^6.2.4
+
+
   # UI and Icons
   cupertino_icons: ^1.0.8
   flutter_svg: ^2.0.9
@@ -22,7 +25,6 @@ dependencies:
 
   # State management
   provider: ^6.1.1
-  # flutter_riverpod: ^2.4.9
 
   # Local storage and persistence
   shared_preferences: ^2.2.2
@@ -52,6 +54,7 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^6.0.0
   build_runner: ^2.4.7
+  flutter_launcher_icons: ^0.13.1
 
 flutter:
   uses-material-design: true
@@ -64,15 +67,33 @@ flutter:
     - assets/images/feedback_image.png
     - assets/images/home_icon.png
     - assets/images/messages_icon.png
-
     - assets/images/settings_icon.png
     - assets/images/welcome_image.png
-    - assets/images/social_media.png
-
-
+    - assets/images/logout.png
+    - assets/images/delete.png
+    - assets/images/material-symbols-light_add-box-outline.png
+    - assets/images/about.png
+    - assets/images/app_logo.png
+    - assets/images/google.png
+    - assets/images/apple.png
+    - assets/images/facebook.png
+    - assets/images/phone.png
+    - assets/images/lost.png
+    - assets/images/locate.png
+    - assets/images/found.png
+    - assets/images/browse.png
+    - assets/images/alarm.png
+    - assets/images/search.png
+    - assets/images/shield.png
+    - assets/images/sound.png
   fonts:
     - family: Inter
       fonts:
         - asset: assets/fonts/Inter-Regular.ttf
         - asset: assets/fonts/Inter-Bold.ttf
           weight: 700
+
+flutter_launcher_icons:
+  image_path: "assets/images/app_logo.png"
+  android: true
+  ios: true
